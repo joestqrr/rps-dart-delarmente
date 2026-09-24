@@ -48,3 +48,67 @@ String? validateMove(String? input) {
     
     return null;
 }
+
+
+/// Determines the winner of a round and returns the winning player"s name.
+String? decideWinner(String playerOneName, String playerTwoName, String playerOneMove, String playerTwoMove) {
+
+    if (playerOneMove == playerTwoMove) {
+        return null;
+
+    } else if ((playerOneMove == "rock" && playerTwoMove == "scissors") || 
+    (playerOneMove == "paper" && playerTwoMove == "rock") || 
+    (playerOneMove == "scissors" && playerTwoMove == "paper")) {
+
+        return playerOneName;
+
+    } else {
+
+        return playerTwoName;
+    }
+}
+
+void main() {
+    
+    print("===== ROCK, PAPER, SCISSORS =====\n");
+
+    String playerOneName = getPlayerName("Player 1");
+    String playerTwoName = getPlayerName("Player 2");
+
+    int playerOneScore = 0;
+    int playerTwoScore = 0;
+    int roundNumber = 1;
+
+    for (int r = 1; r <= 3; r++) {
+
+        print("\n--- Round $roundNumber ---");
+
+        String playerOneMove = getMove(playerOneName);
+        for (int i = 0; i < 30; i++) {
+            print("");
+        }
+
+        String playerTwoMove = getMove(playerTwoName);
+
+        print("\n$playerOneName chose $playerOneMove. " "$playerTwoName chose $playerTwoMove.");
+
+        String? winner = decideWinner(
+            playerOneName,
+            playerTwoName,
+            playerOneMove,
+            playerTwoMove,
+        );
+
+        print("\nResult: ${winner ?? "It\"s a draw!"}");
+
+        if (winner == playerOneName) {
+            playerOneScore++;
+        } else if (winner == playerTwoName) {
+            playerTwoScore++;
+        }
+
+        print("Score -> $playerOneName: $playerOneScore | " "$playerTwoName: $playerTwoScore");
+
+        roundNumber++;
+    }
+}
