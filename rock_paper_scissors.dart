@@ -79,7 +79,9 @@ void main() {
     int playerTwoScore = 0;
     int roundNumber = 1;
 
-    for (int r = 1; r <= 3; r++) {
+    String playAgain;
+
+    do {
 
         print("\n--- Round $roundNumber ---");
 
@@ -110,5 +112,25 @@ void main() {
         print("Score -> $playerOneName: $playerOneScore | " "$playerTwoName: $playerTwoScore");
 
         roundNumber++;
-    }
+
+        stdout.write("\nPlay again? (y/n): ");
+        playAgain = stdin.readLineSync()?.trim().toLowerCase() ?? "n";
+
+        } 
+        
+    while (playAgain != "n");
+
+        print("\n===== FINAL SCORE =====");
+        print("$playerOneName: $playerOneScore | $playerTwoName: $playerTwoScore");
+
+        if (playerOneScore > playerTwoScore) {
+
+            print("Overall winner: $playerOneName");
+        } else if (playerTwoScore > playerOneScore) {
+
+            print("Overall winner: $playerTwoName");
+        } else {
+
+            print("Overall winner: It\"s a draw!");
+        }
 }
